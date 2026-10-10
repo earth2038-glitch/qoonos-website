@@ -7,7 +7,8 @@ Qoonos株式会社の公式Webサイト用、静的1ページサイトです。�
 - `index.html` — 公式サイト本体
 - `styles.css` — デザインとレスポンシブ対応
 - `script.js` — モバイルメニュー、最小限の表示演出
-- `assets/favicon.svg` — 暫定サイトアイコン
+- `assets/qoonos-symbol-transparent.png` — 支給シンボルマークの透過PNG（ヘッダー・フッター・faviconで使用）
+- `assets/favicon.svg` — 旧暫定アイコン（現在は未使用）
 - `.github/workflows/deploy-pages.yml` — GitHub Pages自動デプロイ
 - `PUBLICATION_CHECKLIST.md` — 公開前の確認事項
 
