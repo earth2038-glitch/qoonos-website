@@ -150,10 +150,10 @@ button { color: inherit; font: inherit; }
 .contact-inner small { display: block; margin-top: 13px; color: #73817c; font-size: 10px; }
 .disclaimer { padding: 25px 0; background: #fafcfc; border-top: 1px solid #e4eae8; }
 .disclaimer p { margin: 0; color: #72807b; font-size: 10px; text-align: center; }
-.site-footer { padding: 50px 0; color: #d7e1de; background: #12231e; }
+.site-footer { padding: 50px 0; color: var(--ink-soft); background: #fff; border-top: 1px solid var(--line); }
 .footer-inner { display: flex; align-items: flex-end; justify-content: space-between; }
-.footer-brand { color: #fff; }
-.footer-inner div { text-align: right; }.footer-inner p { margin: 0 0 5px; color: #8fa39d; font-size: 11px; letter-spacing: .08em; }.footer-inner small { font-size: 9px; }
+.footer-brand { color: #111; }
+.footer-inner div { text-align: right; }.footer-inner p { margin: 0 0 5px; color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; }.footer-inner small { font-size: 9px; }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: none; }
