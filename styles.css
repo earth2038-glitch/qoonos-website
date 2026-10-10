@@ -124,6 +124,7 @@ button { color: inherit; font: inherit; }
 .audience-section { overflow: hidden; color: #fff; background: var(--green-dark); }
 .audience-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 105px; }
 .audience-copy .eyebrow { color: #8bcab8; }
+.audience-heading-line { display: block; white-space: nowrap; }
 .audience-copy > p:last-child { margin-top: 30px; color: #b8cdc7; font-size: 14px; line-height: 2; }
 .audience-cards { border-top: 1px solid rgba(255,255,255,.22); }
 .audience-card { display: grid; grid-template-columns: 55px .75fr 1.25fr; gap: 18px; align-items: center; min-height: 135px; border-bottom: 1px solid rgba(255,255,255,.22); }
