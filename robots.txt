@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Sitemapは独自ドメイン確定後に追加してください。
