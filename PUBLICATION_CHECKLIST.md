@@ -18,10 +18,11 @@
 - [ ] `mailto:info@qoonos.com` のリンク先と掲載アドレスが一致している
 - [x] 受信確認後、サイト上の受信確認に関する注意書きを削除した
 - [ ] 掲載するメールアドレスの迷惑メール対策を検討した
-- [ ] 使用する独自ドメインの取得・所有状況を確認した
-- [ ] GitHub PagesのCustom domainとDNSレコードを設定した
-- [ ] HTTPSを有効化し、証明書エラーがないことを確認した
-- [ ] 正規URLに合わせてOGP URL、canonical、sitemap、robots.txtを更新した
+- [x] 使用する独自ドメインの取得・所有状況を確認した
+- [x] GitHub PagesのCustom domainとDNSレコードを設定した
+- [x] HTTPSを有効化し、証明書エラーがないことを確認した
+- [x] 正規URLに合わせてOGP URL、canonical、sitemap、robots.txtを更新した
+- [ ] Google Search Consoleの所有権確認とサイトマップ送信を行った
 
 ## ブランド・文章
 
@@ -59,5 +60,5 @@
 | 代表者 | 登記完了後に掲載 | 氏名・役職を掲載 |
 | 設立 | 2026年11月予定 | 正式年月日へ変更 |
 | 問い合わせ | info@qoonos.com（受信確認済み） | 対応済み |
-| 独自ドメイン | 未設定 | 取得・所有確認後に設定 |
+| 独自ドメイン | https://www.qoonos.com/ | HTTPS・DNS設定済み |
 | ロゴ | 支給シンボルマーク（透過処理済み） | 形状・色・表示を確認 |

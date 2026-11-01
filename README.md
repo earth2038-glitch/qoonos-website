@@ -11,6 +11,8 @@ Qoonos株式会社の公式Webサイト用、静的1ページサイトです。�
 - `assets/favicon.svg` — 旧暫定アイコン（現在は未使用）
 - `.github/workflows/deploy-pages.yml` — GitHub Pages自動デプロイ
 - `PUBLICATION_CHECKLIST.md` — 公開前の確認事項
+- `sitemap.xml` — 正式URLを掲載するサイトマップ
+- `robots.txt` — クロール許可とサイトマップの場所
 
 ビルドツールや外部ライブラリは不要です。デモ画面はHTML/CSS/SVGで構成し、すべて架空データです。
 
@@ -55,11 +57,30 @@ git push -u origin main
 
 以後、`main` ブランチへのpushで自動公開されます。初回公開前に必ず `PUBLICATION_CHECKLIST.md` を完了してください。
 
-## 独自ドメイン（取得・所有確認後のみ）
+## 公開URLとSEO設定
 
-独自ドメインは現時点で未確認のため、`CNAME` ファイルを含めていません。ドメインを確定後、GitHub Pagesの **Custom domain** から設定し、DNS事業者側でGitHubが案内するレコードを登録してください。DNS仕様は変更される可能性があるため、設定時点のGitHub公式ドキュメントを確認してください。
+正式URLは `https://www.qoonos.com/` です。GitHub PagesのCustom domainとEnforce HTTPSを設定済みで、`qoonos.com` から正式URLへ転送します。DNSはお名前.comのレンタルサーバー用ネームサーバーで管理しています。GitHub Actions方式のため、ドメイン設定はGitHub Pages側で管理し、`CNAME` ファイルは不要です。
 
-設定後は **Enforce HTTPS** を有効にします。ルートドメインと `www` のどちらを正規URLにするかも事前に決めてください。
+検索結果向けタイトルは「Qoonos株式会社｜資産承継シミュレーション・Family Office OS」です。canonical、OGPのURL、WebSite構造化データのURL、sitemap.xmlは正式URLに統一しています。サイト名はQoonos、別表記はQoonos株式会社です。未確認の読み仮名や登記情報は構造化データに追加していません。ページ内アンカーは別ページとしてサイトマップへ登録しません。
+
+これらはGoogleへ情報を伝えるための設定です。検索順位、表示タイトル、サイト名、スペル補正候補やAIによる概要の変更を保証するものではありません。Google Search Consoleの所有権確認・サイトマップ送信はアカウント側で別途実施してください。
+
+## Google Search Consoleの登録・確認
+
+1. https://search.google.com/search-console/ に、継続して管理するGoogleアカウントでログインします。
+2. 「プロパティを追加」から「ドメイン」を選び、`qoonos.com` を入力します。httpsやwwwは付けません。
+3. DNSでの所有権確認用に表示されるTXTレコードの値をコピーします。値はGoogleが発行する `google-site-verification=…` 全体です。
+4. お名前.comの契約者としてレンタルサーバーのコントロールパネルにログインし、「ドメイン → qoonos.com → DNS → DNSレコードを追加」を開きます。以前使用したNaviのDNS管理画面ではなく、現在のネームサーバーに対応するコントロールパネルで設定します。
+5. タイプはTXT、ホスト名は空欄（qoonos.com本体）、TTLは3600、値はGoogleが発行した文字列にして追加します。空欄で登録できなければ、その画面の入力方式を確認してから進めます。既存のSPF用TXT、MX、A、wwwのCNAME、ネームサーバーは変更しません。
+6. Search Consoleへ戻り「確認」を押します。見つからない場合はDNS反映を待って再確認します。確認用TXTは確認完了後も残します。
+7. 「サイトマップ」から `https://www.qoonos.com/sitemap.xml` を送信します。
+8. 「URL検査」で `https://www.qoonos.com/` を調べ、「公開URLをテスト」で取得できることを確認します。必要に応じて「インデックス登録をリクエスト」を実行します。表示される「ユーザーが指定した正規URL」と「Googleが選択した正規URL」も確認します。
+9. 「検索結果」等のパフォーマンス画面で、検索語句Qoonosの表示回数・クリック数を継続して確認します。登録直後はデータが表示されるまで時間がかかる場合があります。
+
+公式案内：
+- 所有権確認：https://support.google.com/webmasters/answer/9008080?hl=ja
+- サイト名：https://developers.google.com/search/docs/appearance/site-names?hl=ja
+- サイトマップ：https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap?hl=ja
 
 ## 更新時の注意
 
