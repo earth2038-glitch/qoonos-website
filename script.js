@@ -1,41 +1,61 @@
-const header = document.querySelector('[data-header]');
-const menuButton = document.querySelector('[data-menu-button]');
-const nav = document.querySelector('[data-nav]');
+/* ES5 syntax keeps navigation usable in Safari on iOS 9.
+   Article content is visible in CSS even when this script cannot run. */
+(function () {
+  'use strict';
 
-const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 12);
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
+  var header = document.querySelector('[data-header]');
+  var menuButton = document.querySelector('[data-menu-button]');
+  var nav = document.querySelector('[data-nav]');
+  var yearItems = document.querySelectorAll('[data-year]');
+  var i;
 
-menuButton?.addEventListener('click', () => {
-  const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', String(!isOpen));
-  nav?.classList.toggle('open', !isOpen);
-  document.body.style.overflow = isOpen ? '' : 'hidden';
-});
+  function updateHeader() {
+    if (!header) return;
+    if ((window.pageYOffset || document.documentElement.scrollTop) > 12) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
 
-nav?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menuButton?.setAttribute('aria-expanded', 'false');
+  function closeMenu() {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.querySelector('.sr-only').textContent = 'メニューを開く';
     nav.classList.remove('open');
     document.body.style.overflow = '';
-  });
-});
+  }
 
-document.querySelectorAll('[data-year]').forEach((item) => {
-  item.textContent = String(new Date().getFullYear());
-});
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, false);
 
-const revealItems = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  for (i = 0; i < yearItems.length; i += 1) {
+    yearItems[i].textContent = String(new Date().getFullYear());
+  }
+
+  if (menuButton && nav) {
+    menuButton.addEventListener('click', function () {
+      if (menuButton.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      } else {
+        menuButton.setAttribute('aria-expanded', 'true');
+        menuButton.querySelector('.sr-only').textContent = 'メニューを閉じる';
+        nav.classList.add('open');
+        document.body.style.overflow = 'hidden';
       }
-    });
-  }, { threshold: 0.12 });
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add('visible'));
-}
+    }, false);
+
+    var links = nav.querySelectorAll('a');
+    for (i = 0; i < links.length; i += 1) {
+      links[i].addEventListener('click', closeMenu, false);
+    }
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' || event.keyCode === 27) closeMenu();
+    }, false);
+    window.addEventListener('resize', function () {
+      if (document.documentElement.clientWidth > 900) closeMenu();
+    }, false);
+
+    // Collapse the mobile navigation only after all its handlers are ready.
+    document.documentElement.classList.add('has-menu');
+  }
+}());
