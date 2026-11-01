@@ -34,8 +34,6 @@ button { color: inherit; font: inherit; }
 .menu-button { display: none; }
 
 .hero { position: relative; overflow: hidden; min-height: 810px; padding: 160px 0 106px; background: linear-gradient(128deg, #fff 0%, #fbfdfc 55%, #edf7f3 100%); }
-.hero::after { content: ""; position: absolute; width: 1px; height: 330px; top: 0; left: 57%; background: linear-gradient(#d9e3df, transparent); background: linear-gradient(var(--line), transparent); transform: rotate(34deg); opacity: .7; }
-.hero-glow { position: absolute; width: 480px; height: 480px; right: -160px; bottom: -220px; border: 1px solid rgba(23,107,92,.11); border-radius: 50%; box-shadow: 0 0 0 80px rgba(23,107,92,.025), 0 0 0 160px rgba(23,107,92,.018); }
 .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
 .eyebrow { margin: 0 0 22px; color: #176b5c; color: var(--green); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .hero h1 { margin: 0; font-family: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, Georgia, serif; font-family: var(--serif); font-size: 52px; font-size: clamp(45px, 4vw, 52px); font-weight: 600; line-height: 1.5; letter-spacing: -.055em; }
