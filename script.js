@@ -58,4 +58,48 @@
     // Collapse the mobile navigation only after all its handlers are ready.
     document.documentElement.classList.add('has-menu');
   }
+
+  // Animate only when entering the viewport. Never hide waiting content:
+  // without JavaScript, scroll events or CSS animations it stays readable.
+  var rootStyle = document.documentElement.style;
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion || !rootStyle || !('animation' in rootStyle || 'webkitAnimation' in rootStyle)) return;
+
+  var revealItems = document.querySelectorAll('.reveal');
+  var revealed = [];
+  var revealPending = false;
+  var remaining = revealItems.length;
+
+  function revealInView() {
+    revealPending = false;
+    var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    var index;
+    for (index = 0; index < revealItems.length; index += 1) {
+      if (revealed[index]) continue;
+      var bounds = revealItems[index].getBoundingClientRect();
+      if (bounds.top < viewportHeight * 0.96 && bounds.bottom > 0) {
+        revealed[index] = true;
+        remaining -= 1;
+        revealItems[index].classList.add('is-entering');
+      }
+    }
+    if (remaining === 0) {
+      window.removeEventListener('scroll', scheduleReveal, false);
+      window.removeEventListener('resize', scheduleReveal, false);
+    }
+  }
+
+  function scheduleReveal() {
+    if (revealPending) return;
+    revealPending = true;
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(revealInView);
+    } else {
+      window.setTimeout(revealInView, 16);
+    }
+  }
+
+  window.addEventListener('scroll', scheduleReveal, false);
+  window.addEventListener('resize', scheduleReveal, false);
+  revealInView();
 }());

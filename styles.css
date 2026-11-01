@@ -155,7 +155,16 @@ button { color: inherit; font: inherit; }
 
 /* Content must remain readable without JavaScript or animation support. */
 .reveal { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } * { animation: none !important; } }
+.reveal.is-entering { -webkit-animation: reveal-in .65s ease both; animation: reveal-in .65s ease both; }
+@-webkit-keyframes reveal-in {
+  from { opacity: 0; -webkit-transform: translateY(18px); transform: translateY(18px); }
+  to { opacity: 1; -webkit-transform: none; transform: none; }
+}
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } * { -webkit-animation: none !important; animation: none !important; } }
 
 @media (max-width: 900px) {
   .container { width: calc(100% - 36px); max-width: 700px; }
